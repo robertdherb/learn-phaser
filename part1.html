@@ -16,9 +16,6 @@
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, "", { preload: preload, create: create, update: update });
 
-var platforms;
-var player;
-
 function preload() {
 	/* This preloads some objects for use later. 
 	 * Systax is handler, location
@@ -75,6 +72,10 @@ function create() {
 	player.body.gravity.y = 300;
 	
 	cursors = game.input.keyboard.createCursorKeys();
+	
+	scoreText = game.add.text( 16, 16, "Score: 0", {
+		fontSize: "32px",
+		fill: "#000" } );
 }
 
 function update() {
@@ -110,9 +111,17 @@ function update() {
 	
 }
 
+
+var platforms;
+var player;
+var score = 0;
+var scoreText;
 function collectStar( player, star ) {
 	star.kill();
+	score += 10;
+	scoreText.text = "Score: " + score;
 }
+
 
 </script>
 
